@@ -6,16 +6,40 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
+    @State var selection = 1
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
+        NavigationView {
+            TabView(selection: $selection) {
+                HomeVIew()
+                                .tabItem {
+                                    VStack{
+                                    Image(systemName: "house.fill")
+                                    Text("Home")
+                                    }
+                            }.tag(1)
+                ListView()
+                                .tabItem {
+                                    VStack{
+                                    Image(systemName: "paperplane.circle.fill")
+                                        Text("Table")
+                                    }
+                            }.tag(2)
+                FormView()
+                                .tabItem {
+                                    VStack{
+                                    Image(systemName: "paperplane.circle.fill")
+                                        Text("Form")
+                                    }
+                            }.tag(3)
+                        }
+            .accentColor(.teal)
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+            .navigationTitle(selection == 1 ? "Home" : selection == 2 ?"Table":"Form") // << here !!
+            
+           
+        }
+        }
     }
-}
+
+
